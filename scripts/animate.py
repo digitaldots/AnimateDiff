@@ -10,11 +10,11 @@ from diffusers import AutoencoderKL, DDIMScheduler
 from tqdm.auto import tqdm
 from transformers import CLIPTextModel, CLIPTokenizer
 
-from animatediff.animatediff.models.unet import UNet3DConditionModel
-from animatediff.animatediff.pipelines.pipeline_animation import AnimationPipeline
-from animatediff.animatediff.utils.util import save_videos_grid
-from animatediff.animatediff.utils.convert_from_ckpt import convert_ldm_unet_checkpoint, convert_ldm_clip_checkpoint, convert_ldm_vae_checkpoint
-from animatediff.animatediff.utils.convert_lora_safetensor_to_diffusers import convert_lora
+from AnimateDiff.animatediff.models.unet import UNet3DConditionModel
+from AnimateDiff.animatediff.pipelines.pipeline_animation import AnimationPipeline
+from AnimateDiff.animatediff.utils.util import save_videos_grid
+from AnimateDiff.animatediff.utils.convert_from_ckpt import convert_ldm_unet_checkpoint, convert_ldm_clip_checkpoint, convert_ldm_vae_checkpoint
+from AnimateDiff.animatediff.utils.convert_lora_safetensor_to_diffusers import convert_lora
 from diffusers.utils.import_utils import is_xformers_available
 
 from einops import rearrange, repeat
@@ -36,7 +36,7 @@ def main(**kwargs):
 
     for model_idx, (config_key, model_config) in enumerate(list(config.items())):
 
-        motion_modules = 'animatediff/models/Motion_Module/mm_sd_v15.ckpt'
+        motion_modules = 'AnimateDiff/models/Motion_Module/mm_sd_v15.ckpt'
         motion_modules = [motion_modules] if isinstance(motion_modules, str) else list(motion_modules)
         for motion_module in motion_modules:
 
@@ -67,7 +67,7 @@ def main(**kwargs):
             assert len(unexpected) == 0
 
             # 1.2 T2I
-            model_config.path = 'animatediff/models/DreamBooth_LoRA/lyriel_v16.safetensors'
+            model_config.path = 'AnimateDiff/models/DreamBooth_LoRA/lyriel_v16.safetensors'
             if model_config.path != "":
                 if model_config.path.endswith(".ckpt"):
                     state_dict = torch.load(model_config.path)
