@@ -51,7 +51,7 @@ def main(**kwargs):
             if is_xformers_available():
                 unet.enable_xformers_memory_efficient_attention()
             else:
-                assert False
+                pass
 
             pipeline = AnimationPipeline(
                 vae=vae, text_encoder=text_encoder, tokenizer=tokenizer, unet=unet,
