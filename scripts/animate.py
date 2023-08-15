@@ -57,7 +57,7 @@ def main(**kwargs):
                 vae=vae, text_encoder=text_encoder, tokenizer=tokenizer, unet=unet,
                 scheduler=DDIMScheduler(**OmegaConf.to_container(inference_config.noise_scheduler_kwargs)),
             ).to("cuda")
-
+            
             # 1. unet ckpt
             # 1.1 motion module
             motion_module_state_dict = torch.load(motion_module, map_location="cuda")

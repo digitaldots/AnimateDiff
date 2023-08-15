@@ -291,7 +291,8 @@ class AnimationPipeline(DiffusionPipeline):
                 f" size of {batch_size}. Make sure the batch size matches the length of the generators."
             )
         if latents is None:
-            rand_device = "cpu" if device.type == "mps" else device
+            #rand_device = "cpu" if device.type == "mps" else device
+            rand_device = "cuda"
 
             if isinstance(generator, list):
                 shape = shape
