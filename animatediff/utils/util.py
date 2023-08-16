@@ -11,6 +11,8 @@ from einops import rearrange
 
 
 def save_videos_grid(videos: torch.Tensor, path: str, rescale=False, n_rows=6, fps=8):
+    # For FFMPEG backend:
+    imageio.plugins.ffmpeg.download()
     videos = rearrange(videos, "b c t h w -> t b c h w")
     outputs = []
     for x in videos:
